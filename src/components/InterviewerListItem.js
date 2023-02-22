@@ -4,7 +4,7 @@ import "components/InterviewerListItem.scss";
 
 /**
  * PROPS NEEDED
- * 
+ *
  * id: number - the id of the interviewer
  * name: string - the name of the interviewer
  * avatar: url - a url to an image of the interviewer
@@ -13,19 +13,15 @@ import "components/InterviewerListItem.scss";
  */
 
 export default function InterviewerListItem(props) {
-  const {id, name, avatar, selected, setInterviewer} = props;
+  const { name, avatar, selected, setInterviewer } = props;
 
-  const interviewersClass = classNames("interviewers__item",{
-    "interviewers__item--selected": selected
+  const interviewersClass = classNames("interviewers__item", {
+    "interviewers__item--selected": selected,
   });
 
   return (
-    <li className={interviewersClass} onClick={() => setInterviewer(id)}>
-      <img
-        className="interviewers__item-image"
-        src={avatar}
-        alt={name}
-      />
+    <li className={interviewersClass} onClick={setInterviewer}>
+      <img className="interviewers__item-image" src={avatar} alt={name} />
       {selected && name}
     </li>
   );
