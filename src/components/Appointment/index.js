@@ -1,6 +1,7 @@
 import React from "react";
 import "components/Appointment/index.scss";
 import useVisualMode from "hooks/useVisualMode";
+import { getInterviewersForDay } from "helpers/selectors";
 
 import Header from "./Header";
 import Show from "./Show";
@@ -37,8 +38,8 @@ export default function Appointment(props) {
           {mode === CREATE && (
             <Form
               student={""}
-              interviewers={[]}
-              onCancel={() => transition(EMPTY)}
+              interviewers={props.interviewers}
+              onCancel={() => back(EMPTY)}
             />
           )}
         </>
