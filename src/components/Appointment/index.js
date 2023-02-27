@@ -15,6 +15,7 @@ const CREATE = "CREATE";
 const SAVING = "SAVING";
 const DELETING = "DELETING";
 const CONFIRM = "CONFIRM";
+const EDIT = "EDIT";
 
 export default function Appointment(props) {
   const { mode, transition, back } = useVisualMode(
@@ -37,40 +38,42 @@ export default function Appointment(props) {
 
   return (
     <article className="appointment">
-      {props.interview ? (
-        <>
           <Header time={props.time} />
           {mode === CONFIRM && (
             <Confirm
               message="Are you sure you would like to delete?"
-              onCancel={() => transition(SHOW)}
+              onCancel={back}
               onConfirm={deleteInterview}
             />
           )}
           {mode === DELETING && <Status message="Deleting" />}
+          {mode === EDIT && (
+            <Form
+              student={props.interview.student}
+              interviewer={props.interview.interviewer.id}
+              interviewers={props.interviewers}
+              onCancel={back}
+              onSave={save}
+            />
+          )}
           {mode === SHOW && (
             <Show
               student={props.interview.student}
               interviewer={props.interview.interviewer.name}
+              onEdit={() => transition(EDIT)}
               onDelete={() => transition(CONFIRM)}
             />
           )}
-        </>
-      ) : (
-        <>
-          <Header time={props.time} />
-          {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
-          {mode === SAVING && <Status message="Saving" />}
-          {mode === CREATE && (
-            <Form
-              student={""}
-              interviewers={props.interviewers}
-              onCancel={() => back(EMPTY)}
-              onSave={save}
-            />
-          )}
-        </>
-      )}
+           {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
+           {mode === SAVING && <Status message="Saving" />}
+           {mode === CREATE && (
+             <Form
+               student={""}
+               interviewers={props.interviewers}
+               onCancel={back}
+               onSave={save}
+             />
+           )}
     </article>
   );
 }
