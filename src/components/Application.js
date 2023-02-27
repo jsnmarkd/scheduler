@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React from "react";
 
 import "components/Application.scss";
 
@@ -10,67 +9,14 @@ import {
   getInterview,
   getInterviewersForDay,
 } from "helpers/selectors";
+import useApplicationData from "../hooks/useApplicationData";
 
 export default function Application(props) {
-  const [state, setState] = useState({
-    day: "Monday",
-    days: [],
-    appointments: {},
-    interviewers: {},
-  });
-
-  const setDay = (day) => {
-    setState({ ...state, day });
-  };
+  const { state, setDay, bookInterview, cancelInterview } =
+    useApplicationData();
 
   const dailyAppointments = getAppointmentsForDay(state, state.day);
   const interviewers = getInterviewersForDay(state, state.day);
-
-  function bookInterview(id, interview) {
-    const appointment = {
-      ...state.appointments[id],
-      interview: { ...interview },
-    };
-    const appointments = {
-      ...state.appointments,
-      [id]: appointment,
-    };
-    return axios
-      .put(`http://localhost:8001/api/appointments/${id}`, { interview })
-      .then(() => {
-        setState({
-          ...state,
-          appointments,
-        });
-      })
-      .catch((err) => {
-        console.log(err.message);
-        throw new Error("Could not save appointment");
-      });
-  }
-
-  function cancelInterview(id) {
-    const appointment = {
-      ...state.appointments[id],
-      interview: null,
-    };
-    const appointments = {
-      ...state.appointments,
-      [id]: appointment,
-    };
-    return axios
-      .delete(`http://localhost:8001/api/appointments/${id}`, appointment)
-      .then(() => {
-        setState({
-          ...state,
-          appointments,
-        });
-      })
-      .catch((err) => {
-        console.log(err.message);
-        throw new Error("Could not cancel appointment");
-      });
-  }
 
   const schedule = dailyAppointments.map((appointment) => {
     const interview = getInterview(state, appointment.interview);
@@ -86,27 +32,6 @@ export default function Application(props) {
       />
     );
   });
-
-  useEffect(() => {
-    const urlDays = `http://localhost:8001/api/days`;
-    const urlAppointments = `http://localhost:8001/api/appointments`;
-    const urlInterviewers = `http://localhost:8001/api/interviewers`;
-    Promise.all([
-      axios.get(urlDays),
-      axios.get(urlAppointments),
-      axios.get(urlInterviewers),
-    ]).then((all) => {
-      const setDays = all[0].data;
-      const setAppointments = all[1].data;
-      const setInterviewers = all[2].data;
-      setState((prev) => ({
-        ...prev,
-        days: setDays,
-        appointments: setAppointments,
-        interviewers: setInterviewers,
-      }));
-    });
-  }, []);
 
   return (
     <main className="layout">
@@ -126,7 +51,10 @@ export default function Application(props) {
           alt="Lighthouse Labs"
         />
       </section>
-      <section className="schedule">{schedule}</section>
+      <section className="schedule">
+        {schedule}
+        <Appointment key="last" time="5pm" />
+      </section>
     </main>
   );
 }
