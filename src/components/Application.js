@@ -45,6 +45,7 @@ export default function Application(props) {
       })
       .catch((err) => {
         console.log(err.message);
+        throw new Error("Could not save appointment");
       });
   }
 
@@ -67,6 +68,7 @@ export default function Application(props) {
       })
       .catch((err) => {
         console.log(err.message);
+        throw new Error("Could not cancel appointment");
       });
   }
 
