@@ -3,9 +3,9 @@ import axios from "axios";
 
 export default function useApplicationData() {
   useEffect(() => {
-    const urlDays = `http://localhost:8001/api/days`;
-    const urlAppointments = `http://localhost:8001/api/appointments`;
-    const urlInterviewers = `http://localhost:8001/api/interviewers`;
+    const urlDays = `/api/days`;
+    const urlAppointments = `/api/appointments`;
+    const urlInterviewers = `/api/interviewers`;
     Promise.all([
       axios.get(urlDays),
       axios.get(urlAppointments),
@@ -62,7 +62,7 @@ export default function useApplicationData() {
     });
 
     return axios
-      .put(`http://localhost:8001/api/appointments/${id}`, { interview })
+      .put(`/api/appointments/${id}`, { interview })
       .then(() => {
         setState((prev) => ({
           ...prev,
@@ -104,7 +104,7 @@ export default function useApplicationData() {
     });
 
     return axios
-      .delete(`http://localhost:8001/api/appointments/${id}`, appointment)
+      .delete(`/api/appointments/${id}`, appointment)
       .then(() => {
         setState((prev) => ({
           ...prev,
