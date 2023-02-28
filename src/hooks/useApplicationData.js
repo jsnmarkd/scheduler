@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 export default function useApplicationData() {
-
   useEffect(() => {
     const urlDays = `http://localhost:8001/api/days`;
     const urlAppointments = `http://localhost:8001/api/appointments`;
@@ -23,18 +22,18 @@ export default function useApplicationData() {
       }));
     });
   }, []);
-  
+
   const [state, setState] = useState({
     day: "Monday",
     days: [],
     appointments: {},
     interviewers: {},
   });
-  
+
   const setDay = (day) => {
-    setState({ ...state, day });
+    setState((prev) => ({ ...prev, day }));
   };
-  
+
   function bookInterview(id, interview) {
     const appointment = {
       ...state.appointments[id],
@@ -44,20 +43,39 @@ export default function useApplicationData() {
       ...state.appointments,
       [id]: appointment,
     };
+
+    const getSpots = (day) => {
+      const num = day.appointments.length;
+      let count = 0;
+      for (const appId of day.appointments) {
+        if (appointments[appId].interview) {
+          count++;
+        }
+      }
+      return num - count;
+    };
+
+    const days = state.days.map((day) => {
+      return day.appointments.includes(id)
+        ? { ...day, spots: getSpots(day) }
+        : day;
+    });
+
     return axios
       .put(`http://localhost:8001/api/appointments/${id}`, { interview })
       .then(() => {
-        setState({
-          ...state,
+        setState((prev) => ({
+          ...prev,
           appointments,
-        });
+          days,
+        }));
       })
       .catch((err) => {
         console.log(err.message);
         throw new Error("Could not save appointment");
       });
   }
-  
+
   function cancelInterview(id) {
     const appointment = {
       ...state.appointments[id],
@@ -67,19 +85,38 @@ export default function useApplicationData() {
       ...state.appointments,
       [id]: appointment,
     };
+
+    const getSpots = (day) => {
+      const num = day.appointments.length;
+      let count = 0;
+      for (const appId of day.appointments) {
+        if (appointments[appId].interview) {
+          count++;
+        }
+      }
+      return num - count;
+    };
+
+    const days = state.days.map((day) => {
+      return day.appointments.includes(id)
+        ? { ...day, spots: getSpots(day) }
+        : day;
+    });
+
     return axios
       .delete(`http://localhost:8001/api/appointments/${id}`, appointment)
       .then(() => {
-        setState({
-          ...state,
+        setState((prev) => ({
+          ...prev,
           appointments,
-        });
+          days,
+        }));
       })
       .catch((err) => {
         console.log(err.message);
         throw new Error("Could not cancel appointment");
       });
   }
-  
-  return { cancelInterview, bookInterview, setDay, state }
+
+  return { cancelInterview, bookInterview, setDay, state };
 }
