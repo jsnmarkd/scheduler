@@ -10,7 +10,6 @@ import DayListItem from "./DayListItem";
  */
 
 export default function DayList(props) {
-
   const parsedDays = props.days.map((day) => {
     return (
       <DayListItem
@@ -23,9 +22,5 @@ export default function DayList(props) {
     );
   });
 
-  return (
-    <ul>
-      {parsedDays}
-    </ul>
-  );
+  return <ul>{parsedDays}</ul>;
 }

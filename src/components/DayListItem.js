@@ -26,7 +26,7 @@ export default function DayListItem(props) {
     } else {
       return <h3 className="text--light">no spots remaining</h3>;
     }
-  }
+  };
 
   return (
     <li data-testid="day" className={dayClass} onClick={() => setDay(name)}>

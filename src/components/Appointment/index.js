@@ -26,7 +26,6 @@ export default function Appointment(props) {
   );
 
   function save(name, interviewer) {
-
     const interview = {
       student: name,
       interviewer,
@@ -34,16 +33,17 @@ export default function Appointment(props) {
 
     transition(SAVING);
 
-    props.bookInterview(props.id, interview)
+    props
+      .bookInterview(props.id, interview)
       .then(() => transition(SHOW))
       .catch(() => transition(ERROR_SAVE, true));
   }
 
   function deleteInterview() {
-
     transition(DELETING, true);
-    
-    props.cancelInterview(props.id)
+
+    props
+      .cancelInterview(props.id)
       .then(() => transition(EMPTY))
       .catch(() => transition(ERROR_DELETE, true));
   }

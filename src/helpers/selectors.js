@@ -1,30 +1,49 @@
+/**
+ * Selectors for given day
+ * @param {object} state
+ * @param {string} day
+ * @returns {array} of appointment objects
+ */
+
 export function getAppointmentsForDay(state, day) {
-  // find the day object with the given name
   const dayObj = state.days.find((res) => res.name === day);
 
   if (!dayObj) {
-    // return an empty array if the day does not exist
     return [];
   }
 
-  // map over the appointment IDs for this day and return the appointment objects
   const appointments = dayObj.appointments.map((id) => state.appointments[id]);
 
   return appointments;
 }
 
+/**
+ * Selectors for given day
+ * @param {object} state
+ * @param {string} day
+ * @returns {array} of interviewer objects
+ */
+
 export function getInterviewersForDay(state, day) {
-  
   const dayObj = state.days.find((res) => res.name === day);
 
   if (!dayObj) {
     return [];
   }
 
-  const interviewers = Object.values(dayObj.appointments).map((id) => state.interviewers[id]);
+  const interviewers = Object.values(dayObj.appointments).map(
+    (id) => state.interviewers[id]
+  );
 
   return interviewers;
 }
+
+/**
+ * Selector for given interview
+ * @param {object} state
+ * @param {object} interview data with interviewer id
+ * @returns {object} interview data with interviewer data
+ */
 
 export function getInterview(state, interview) {
   if (!interview) {
