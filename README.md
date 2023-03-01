@@ -24,22 +24,22 @@
 
 **Denpendencies**
 
--[Axios](https://axios-http.com/docs/intro)
--[classnames](https://www.npmjs.com/package/classnames)
--[normalize.css](https://necolas.github.io/normalize.css/)
--[React](https://reactjs.org/)
--[ReactDOM](https://reactjs.org/docs/react-dom.html)
--[React-scripts](https://www.npmjs.com/package/react-scripts)
+- [Axios](https://axios-http.com/docs/intro)
+- [classnames](https://www.npmjs.com/package/classnames)
+- [normalize.css](https://necolas.github.io/normalize.css/)
+- [React](https://reactjs.org/)
+- [ReactDOM](https://reactjs.org/docs/react-dom.html)
+- [React-scripts](https://www.npmjs.com/package/react-scripts)
 
 **Dev-dependencies**
 
--[Babel](https://www.npmjs.com/package/@babel/core)
--[Storybook](https://storybook.js.org/)
--[Testing Library](https://testing-library.com/)
--[Cypress](https://www.cypress.io/)
--[Prop-Types](https://www.npmjs.com/package/prop-types)
--[React-test-renderer](https://www.npmjs.com/package/react-test-renderer)
--[SASS](https://sass-lang.com/)
+- [Babel](https://www.npmjs.com/package/@babel/core)
+- [Storybook](https://storybook.js.org/)
+- [Testing Library](https://testing-library.com/)
+- [Cypress](https://www.cypress.io/)
+- [Prop-Types](https://www.npmjs.com/package/prop-types)
+- [React-test-renderer](https://www.npmjs.com/package/react-test-renderer)
+- [SASS](https://sass-lang.com/)
 
 ## Setup
 
