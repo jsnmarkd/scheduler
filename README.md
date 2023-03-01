@@ -20,6 +20,10 @@
 
 ## Final Product
 
+<p align="center">
+<img src="https://github.com/jsnmarkd/scheduler/blob/master/docs/demo_scheduler.gif">
+</p>
+
 ## Dependencies
 
 **Denpendencies**
