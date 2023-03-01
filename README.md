@@ -1,4 +1,4 @@
-# Interview Scheduler
+<h1 align="center">Interview Scheduler</h1>
 
 ## Setup
 
