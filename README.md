@@ -20,8 +20,16 @@
 
 ## Final Product
 
+**Demo**
+
 <p align="center">
 <img src="https://github.com/jsnmarkd/scheduler/blob/master/docs/demo_scheduler.gif">
+</p>
+
+**Error Demo**
+
+<p align="center">
+<img src="https://github.com/jsnmarkd/scheduler/blob/master/docs/demo_error.gif">
 </p>
 
 ## Dependencies
