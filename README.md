@@ -9,7 +9,7 @@
 <h4 align="center">
   This project is a Single Page Application built with 
   <a href="https://reactjs.org/">React</a> 
-  that allows users to book, edit and cancel interviews
+  that allows users to book, edit and cancel interviews. The database can be accessed <a href="https://github.com/lighthouse-labs/scheduler-api">Here</a>.
 </h4>
 
 <p align="center">
@@ -56,6 +56,13 @@
 ## Setup
 
 Install dependencies with `npm install`.
+
+## Running The API Server
+
+```sh
+clone this <a href="https://github.com/lighthouse-labs/scheduler-api">link</a>
+and follow the README.md file
+```
 
 ## Running Webpack Development Server
 
