@@ -59,10 +59,8 @@ Install dependencies with `npm install`.
 
 ## Running The API Server
 
-```sh
 clone this <a href="https://github.com/lighthouse-labs/scheduler-api">link</a>
 and follow the README.md file
-```
 
 ## Running Webpack Development Server
 
